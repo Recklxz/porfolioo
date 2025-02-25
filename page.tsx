@@ -39,7 +39,7 @@ export default function Page() {
       title: "Pico Logger - USB HID Security Research",
       description:
         "Developed a Raspberry Pi Pico-based USB device simulating keystroke logging capabilities with Ducky Script implementation.",
-      github: "https://github.com/Recklxz/pico-logger",
+      github: "https://github.com/Recklxz/picologger",
       color: "yellow",
     },
     {
@@ -49,6 +49,27 @@ export default function Page() {
       github: "https://github.com/Recklxz/snowdenware",
       color: "blue",
     },
+    {
+      title: "KeyLogger - Advanced Keyboard Monitoring",
+      description:
+        "Created a sophisticated Python-based keylogger using pynput library, capable of capturing and logging both alphanumeric and special keys for security research.",
+      github: "https://github.com/Recklxz/KeyLogger",
+      color: "red",
+    },
+    {
+      title: "AskMeOut - Dating Platform",
+      description:
+        "Developed an innovative dating platform focused on turning curiosity into meaningful connections, featuring a unique ice-breaking approach.",
+      github: "https://github.com/Recklxz/AskMeOut",
+      color: "pink",
+    },
+    {
+      title: "BMI Calculator Website",
+      description:
+        "Created an interactive web application for calculating and tracking Body Mass Index (BMI), helping users monitor their health metrics.",
+      github: "https://github.com/Recklxz/Bmi-website",
+      color: "green",
+    }
   ]
 
   useEffect(() => {
@@ -324,4 +345,3 @@ export default function Page() {
     </div>
   )
 }
-

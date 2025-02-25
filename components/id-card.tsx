@@ -32,8 +32,8 @@ export default function IDCard({ className, initialData, onDataChange }: IDCardP
     role: "Cybersecurity Student",
     institution: "PSIT (2022-2026)",
     email: "anmolkool076@gmail.com",
-    github: "github.com/Recklxz",
-    linkedin: "linkedin.com/in/anmolkool",
+    github: "https://github.com/Recklxz",
+    linkedin: "https://www.linkedin.com/in/anmol-kool-1475632a3",
     bio: "Cybersecurity student with expertise in penetration testing, threat detection, and security automation."
   })
 
