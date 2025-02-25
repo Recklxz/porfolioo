@@ -2,27 +2,20 @@
 const nextConfig = {
   output: 'export',
   basePath: '/portfolioo',
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-    ],
     unoptimized: true,
   },
+  // Disable experimental features that might cause issues
   experimental: {
-    webpackBuildWorker: true,
-    parallelServerBuildTraces: true,
-    parallelServerCompiles: true,
+    webpackBuildWorker: false,
+    parallelServerCompiles: false,
+    parallelServerBuildTraces: false,
   },
-  swcMinify: false, // Disable SWC minification
-}
+  // Compiler options
+  compiler: {
+    // Disable React strict mode during build
+    reactStrictMode: false,
+  },
+};
 
-export default nextConfig
+export default nextConfig;
