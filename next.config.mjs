@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  basePath: '/portfolioo',
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -13,6 +15,7 @@ const nextConfig = {
         hostname: '**',
       },
     ],
+    unoptimized: true,
   },
   experimental: {
     webpackBuildWorker: true,
