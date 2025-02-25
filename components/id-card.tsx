@@ -4,7 +4,7 @@ import { motion, useMotionValue, useSpring, useTransform, MotionValue } from "fr
 import Image from "next/image"
 import { GraduationCap, Mail, Github, Linkedin } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { ElasticRibbon } from "./elastic-ribbon"
 
 interface IDCardProps {
@@ -20,6 +20,9 @@ export default function IDCard({ className }: IDCardProps) {
   const springConfig = { damping: 20, stiffness: 400, mass: 0.5 }
   const springX = useSpring(x, springConfig)
   const springY = useSpring(y, springConfig)
+
+  // State for window dimensions
+  const [windowDimensions, setWindowDimensions] = useState({ width: 1200, height: 800 })
 
   // Calculate rotation based on position
   const rotate = useTransform(
@@ -38,18 +41,44 @@ export default function IDCard({ className }: IDCardProps) {
     // Reset position on component mount
     x.set(0)
     y.set(0)
+
+    // Update window dimensions
+    const updateDimensions = () => {
+      setWindowDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      })
+    }
+
+    // Initial update
+    updateDimensions()
+
+    // Listen for window resize
+    window.addEventListener('resize', updateDimensions)
+
+    return () => {
+      window.removeEventListener('resize', updateDimensions)
+    }
   }, [])
+
+  // Calculate ribbon positions
+  const startPoint = {
+    x: windowDimensions.width - 40,
+    y: 20,
+  }
+
+  const endPoint = {
+    x: windowDimensions.width - 200 + springX.get(),
+    y: 120 + springY.get(),
+  }
 
   return (
     <div ref={containerRef} className="relative w-full h-[500px]">
       {/* SVG container for ribbon */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none">
         <ElasticRibbon
-          startPoint={{ x: window.innerWidth - 40, y: 20 }}
-          endPoint={{
-            x: window.innerWidth - 200 + springX.get(),
-            y: 120 + springY.get()
-          }}
+          startPoint={startPoint}
+          endPoint={endPoint}
         />
       </svg>
 
