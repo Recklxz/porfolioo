@@ -77,14 +77,16 @@ export default function IDCard({ className }: IDCardProps) {
         <div className="space-y-4">
           <div className="flex items-start gap-4">
             <div className="w-24 h-24 bg-white rounded-full overflow-hidden ring-4 ring-white/20">
-              <Image 
-                src="/portfolioo/profile-picture.jpg" 
-                alt="Anmol Kool - Profile Picture" 
-                width={96} 
-                height={96} 
-                className="object-cover w-full h-full"
-                priority
-              />
+              <div className="relative w-full h-full">
+                <Image 
+                  src="profile-picture.jpg"
+                  alt="Anmol Kool - Profile Picture" 
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="96px"
+                />
+              </div>
             </div>
             <div className="flex-1">
               <h3 className="text-white text-xl font-bold">Anmol Kool</h3>

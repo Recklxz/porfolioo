@@ -4,6 +4,8 @@ const nextConfig = {
   basePath: '/portfolioo',
   images: {
     unoptimized: true,
+    loader: 'custom',
+    loaderFile: './image-loader.js',
   },
   // Disable experimental features that might cause issues
   experimental: {
