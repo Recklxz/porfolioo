@@ -20,13 +20,13 @@ export default function IDCard({ className }: IDCardProps) {
     >
       <div className="space-y-4">
         <div className="flex items-start gap-4">
-          <div className="w-24 h-24 bg-white rounded-full overflow-hidden">
+          <div className="w-24 h-24 bg-white rounded-full overflow-hidden ring-4 ring-white/20">
             <Image 
-              src="/placeholder.svg" 
-              alt="Profile" 
+              src="/profile-picture.jpg" 
+              alt="Anmol Kool - Profile Picture" 
               width={96} 
               height={96} 
-              className="object-cover"
+              className="object-cover w-full h-full"
               priority
             />
           </div>
