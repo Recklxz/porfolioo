@@ -22,11 +22,13 @@ export default function IDCard({ className }: IDCardProps) {
   const springY = useSpring(y, springConfig)
 
   // Calculate rotation based on position
-  const rotate = useTransform(
+  const rotate = useTransform<number[], number>(
     [springX, springY],
     ([latestX, latestY]) => {
-      const distance = Math.sqrt(latestX * latestX + latestY * latestY)
-      return (Math.atan2(latestY, latestX) * 180) / Math.PI + (distance * 0.1)
+      const x = latestX as number
+      const y = latestY as number
+      const distance = Math.sqrt(x * x + y * y)
+      return (Math.atan2(y, x) * 180) / Math.PI + (distance * 0.1)
     }
   )
 

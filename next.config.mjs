@@ -13,11 +13,8 @@ const nextConfig = {
     parallelServerCompiles: false,
     parallelServerBuildTraces: false,
   },
-  // Compiler options
-  compiler: {
-    // Disable React strict mode during build
-    reactStrictMode: false,
-  },
-};
+  // Enable React strict mode
+  reactStrictMode: false,
+}
 
 export default nextConfig;
