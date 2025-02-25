@@ -198,21 +198,17 @@ export default function IDCard({ className, initialData, onDataChange }: IDCardP
           transformOrigin: "top right"
         }}
         initial={{ y: 0 }}
-        animate={
-          isDragging 
-            ? { y: springY }
-            : {
-                y: [0, 8, 0],
-                transition: {
-                  y: {
-                    repeat: Infinity,
-                    duration: 2,
-                    ease: "easeInOut",
-                    repeatType: "reverse"
-                  }
-                }
-              }
-        }
+        animate={!isDragging ? {
+          y: [0, 8, 0],
+          transition: {
+            y: {
+              repeat: Infinity,
+              duration: 2,
+              ease: "easeInOut",
+              repeatType: "reverse"
+            }
+          }
+        } : undefined}
         className={cn(
           "absolute top-4 right-[200px] bg-gradient-to-br from-orange-500 to-orange-600 p-6 rounded-lg shadow-xl max-w-sm",
           "cursor-grab active:cursor-grabbing backdrop-blur-sm",
