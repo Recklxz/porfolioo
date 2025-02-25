@@ -13,13 +13,15 @@ interface ElasticRibbonProps {
   endPoint: Point
   tension?: number
   color?: string
+  stretched: boolean
 }
 
 export function ElasticRibbon({
   startPoint,
   endPoint,
   tension = 0.3,
-  color = "#FF9800"
+  color = "#FF9800",
+  stretched
 }: ElasticRibbonProps) {
   const pathRef = useRef<SVGPathElement>(null)
 
@@ -34,11 +36,11 @@ export function ElasticRibbon({
   // Calculate control points for the bezier curve
   const controlPoint1 = {
     x: startPoint.x,
-    y: startPoint.y + (endPoint.y - startPoint.y) * tension
+    y: startPoint.y + (endPoint.y - startPoint.y) * (stretched ? tension * 0.5 : tension)
   }
   const controlPoint2 = {
     x: endPoint.x,
-    y: startPoint.y + (endPoint.y - startPoint.y) * (1 - tension)
+    y: startPoint.y + (endPoint.y - startPoint.y) * (stretched ? 1 - tension * 0.5 : 1 - tension)
   }
 
   // Create the path data for the elastic curve
@@ -54,10 +56,13 @@ export function ElasticRibbon({
       ref={pathRef}
       d={pathData}
       stroke={color}
-      strokeWidth={4}
+      strokeWidth={stretched ? 3 : 4}
       fill="none"
       initial={{ pathLength: 0 }}
-      animate={{ pathLength: 1 }}
+      animate={{ 
+        pathLength: 1,
+        strokeWidth: stretched ? 3 : 4
+      }}
       transition={{
         duration: 0.5,
         ease: "easeInOut"
