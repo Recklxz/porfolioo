@@ -150,36 +150,34 @@ export default function IDCard({ className, initialData, onDataChange }: IDCardP
     return Math.sqrt(currentX * currentX + currentY * currentY)
   }
 
-  // Calculate ribbon positions
-  const startPoint = {
-    x: windowDimensions.width - 40,
-    y: 20,
-  }
-
-  const endPoint = {
-    x: windowDimensions.width - 200 + springX.get(),
-    y: 120 + springY.get(),
-  }
-
   return (
     <div ref={containerRef} className="relative w-full h-[500px]">
       {/* SVG container for ribbon */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none">
         <ElasticRibbon
-          startPoint={startPoint}
-          endPoint={endPoint}
+          startPoint={{
+            x: windowDimensions.width - 20,
+            y: 0,
+          }}
+          endPoint={{
+            x: windowDimensions.width - 200 + springX.get(),
+            y: 100 + springY.get(),
+          }}
           tension={0.3}
           stretched={isDragging || getDistance() > 50}
         />
       </svg>
 
+      {/* Hanging point */}
+      <div className="absolute top-0 right-[200px] w-4 h-4 bg-zinc-800 rounded-full shadow-lg z-10" />
+      
       <motion.div
         drag
         dragConstraints={{
-          top: -150,
+          top: -50,
           left: -300,
           right: 50,
-          bottom: 150,
+          bottom: 250,
         }}
         dragElastic={0.3}
         dragTransition={{ 
@@ -197,15 +195,29 @@ export default function IDCard({ className, initialData, onDataChange }: IDCardP
           y: springY,
           rotate,
           scale,
+          transformOrigin: "top right"
+        }}
+        initial={{ rotate: -5 }}
+        animate={{ 
+          rotate: isDragging ? rotate : [-3, -5, -4],
+          transition: {
+            rotate: {
+              repeat: Infinity,
+              duration: 4,
+              ease: "easeInOut"
+            }
+          }
         }}
         className={cn(
-          "absolute top-20 right-[200px] bg-gradient-to-br from-orange-500 to-orange-600 p-6 rounded-lg shadow-xl max-w-sm",
+          "absolute top-4 right-[200px] bg-gradient-to-br from-orange-500 to-orange-600 p-6 rounded-lg shadow-xl max-w-sm",
           "cursor-grab active:cursor-grabbing backdrop-blur-sm",
           "hover:shadow-2xl transition-all duration-200",
           "before:absolute before:inset-0 before:bg-white/10 before:rounded-lg before:opacity-50",
           className
         )}
       >
+        {/* Card hole for hanging */}
+        <div className="absolute -top-3 right-8 w-6 h-3 bg-zinc-700 rounded-b-lg" />
         <div className="space-y-4 relative">
           <div className="flex items-start gap-4">
             <div className="w-24 h-24 bg-white rounded-full overflow-hidden ring-4 ring-white/20 shadow-lg">
