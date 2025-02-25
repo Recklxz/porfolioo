@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { motion, useMotionValue, useSpring, useTransform, MotionValue } from "framer-motion"
 import Image from "next/image"
 import { GraduationCap, Mail, Github, Linkedin } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -22,11 +22,10 @@ export default function IDCard({ className }: IDCardProps) {
   const springY = useSpring(y, springConfig)
 
   // Calculate rotation based on position
-  const rotate = useTransform<number[], number>(
-    [springX, springY],
-    ([latestX, latestY]) => {
-      const x = latestX as number
-      const y = latestY as number
+  const rotate = useTransform(
+    [springX, springY] as MotionValue<number>[],
+    (latest: number[]) => {
+      const [x, y] = latest
       const distance = Math.sqrt(x * x + y * y)
       return (Math.atan2(y, x) * 180) / Math.PI + (distance * 0.1)
     }
