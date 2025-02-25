@@ -324,7 +324,7 @@ export default function Page() {
                 </motion.div>
               </Link>
               <Link
-                href="https://linkedin.com/in/anmolkool"
+                href="https://www.linkedin.com/in/anmol-kool-1475632a3"
                 className="text-white hover:text-pink-200 transition-colors"
               >
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
