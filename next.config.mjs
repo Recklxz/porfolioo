@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  basePath: '/portfolio',
+  basePath: '/portfolioo',
   images: {
     unoptimized: true,
     loader: 'custom',
