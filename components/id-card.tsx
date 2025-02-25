@@ -151,16 +151,16 @@ export default function IDCard({ className, initialData, onDataChange }: IDCardP
   }
 
   return (
-    <div ref={containerRef} className="relative w-full h-[500px]">
+    <div ref={containerRef} className="relative w-full h-[500px] flex items-center justify-center overflow-hidden">
       {/* SVG container for ribbon */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none">
         <ElasticRibbon
           startPoint={{
-            x: windowDimensions.width - 20,
+            x: Math.min(windowDimensions.width - 20, 800),
             y: 0,
           }}
           endPoint={{
-            x: windowDimensions.width - 200 + springX.get(),
+            x: Math.min(windowDimensions.width / 2 + 150 + springX.get(), 800),
             y: 100 + springY.get(),
           }}
           tension={0.3}
@@ -169,14 +169,14 @@ export default function IDCard({ className, initialData, onDataChange }: IDCardP
       </svg>
 
       {/* Hanging point */}
-      <div className="absolute top-0 right-[200px] w-4 h-4 bg-zinc-800 rounded-full shadow-lg z-10" />
+      <div className="absolute top-0 right-1/2 translate-x-[150px] w-4 h-4 bg-zinc-800 rounded-full shadow-lg z-10" />
       
       <motion.div
         drag
         dragConstraints={{
           top: -50,
-          left: -300,
-          right: 50,
+          left: -200,
+          right: 200,
           bottom: 250,
         }}
         dragElastic={0.3}
@@ -195,7 +195,7 @@ export default function IDCard({ className, initialData, onDataChange }: IDCardP
           y: springY,
           rotate: -2,
           scale,
-          transformOrigin: "top right"
+          transformOrigin: "top center"
         }}
         initial={{ y: 0 }}
         animate={!isDragging ? {
@@ -210,15 +210,17 @@ export default function IDCard({ className, initialData, onDataChange }: IDCardP
           }
         } : undefined}
         className={cn(
-          "absolute top-4 right-[200px] bg-gradient-to-br from-orange-500 to-orange-600 p-6 rounded-lg shadow-xl max-w-sm",
+          "absolute top-4 left-1/2 -translate-x-[200px] bg-gradient-to-br from-orange-500 to-orange-600 p-6 rounded-lg shadow-xl",
+          "w-full max-w-sm mx-auto",
           "cursor-grab active:cursor-grabbing backdrop-blur-sm",
           "hover:shadow-2xl transition-all duration-200",
           "before:absolute before:inset-0 before:bg-white/10 before:rounded-lg before:opacity-50",
+          "sm:w-[24rem]",
           className
         )}
       >
         {/* Card hole for hanging */}
-        <div className="absolute -top-3 right-8 w-6 h-3 bg-zinc-700 rounded-b-lg" />
+        <div className="absolute -top-3 right-1/2 translate-x-4 w-6 h-3 bg-zinc-700 rounded-b-lg" />
         <div className="space-y-4 relative">
           <div className="flex items-start gap-4">
             <div className="w-24 h-24 bg-white rounded-full overflow-hidden ring-4 ring-white/20 shadow-lg">
