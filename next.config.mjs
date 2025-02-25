@@ -22,6 +22,7 @@ const nextConfig = {
     parallelServerBuildTraces: true,
     parallelServerCompiles: true,
   },
+  swcMinify: false, // Disable SWC minification
 }
 
 export default nextConfig
